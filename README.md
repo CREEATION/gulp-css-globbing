@@ -74,6 +74,7 @@ gulp.task('jade', function(){
     .pipe(jadeGlobbing({
       ignore: ['src/layout/templates']
     }))
+    .pipe(jade())
     .pipe(gulp.dest('build'));
 });
 ```
