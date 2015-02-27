@@ -1,110 +1,86 @@
-# gulp-css-globbing [![Build Status][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
-> A Gulp plugin for globbing CSS `@import` statements
+# gulp-jade-globbing
+> Globbing with Jade's `include` the easy way.
 
-Expands CSS `@import` statements containing globs with the full paths. Useful with pre-processors like Sass.
+Expands Jade `include` statements containing globs with the full paths.
 
-Heavily inspired by [`sass-globbing`](https://github.com/chriseppstein/sass-globbing)
+Heavily inspired by [`sass-globbing`](https://github.com/chriseppstein/sass-globbing) and [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
 
 ## Install
 
-Install `gulp-css-globbing` as a development dependency using npm:
+Install `gulp-jade-globbing` as a development dependency using npm:
 
 ```shell
-npm install --save-dev gulp-css-globbing
+npm install --save-dev gulp-jade-globbing
 ```
 
 ## Usage
 
 ```javascript
-var cssGlobbing = require('gulp-css-globbing');
+var jade          = require('gulp-jade');
+var jadeGlobbing  = require('gulp-jade-globbing');
 
-gulp.task('css', function(){
-  gulp.src(['src/styles.css'])
-    .pipe(cssGlobbing())
-    .pipe(gulp.dest('build/styles.css'));
+gulp.task('jade', function(){
+  gulp.src(['src/index.jade'])
+    .pipe(jadeGlobbing())
+    .pipe(jade())
+    .pipe(gulp.dest('build'));
 });
 ```
 
-Given a CSS file that looks like this:
+Given a Jade file that looks like this:
 
-```css
-@import url('components/*.css');
+```jade
+//- Include Everything
+include ../**/*.jade
 
-body {
-  background: white;
-}
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Hello?
+
+  body
+    h1 Hello World!
 ```
 
 The plugin would produce the following:
 
-```css
-@import url('components/flex-embed.css');
-@import url('components/media.css');
+```jade
+//- Include Everything
+include ../layout/header/template.jade
+include ../layout/navigation/template.jade
+include ../modules/buttons/template.jade
+include ../modules/forms/template.jade
+include ../modules/tables/template.jade
+include ../modules/notification/template.jade
 
-body {
-  background: white;
-}
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Hello?
+
+  body
+    h1 Hello World!
 ```
-
-Globbing is relative to the source file's path.
-
 
 ## Options
 
-`gulp-css-globbing` can be called with an options object:
+`gulp-jade-globbing` can be called with an options object:
 
 ```javascript
-gulp.task('css', function(){
-  gulp.src(['src/styles.css'])
-    .pipe(cssGlobbing({
-      extensions: ['.css', '.scss'],
-      ignoreFolders: ['../styles'],
-      autoReplaceBlock: {
-        onOff: false,
-        globBlockBegin: 'cssGlobbingBegin',
-        globBlockEnd: 'cssGlobbingEnd',
-        globBlockContents: '../**/*.scss'
-      }
+gulp.task('jade', function(){
+  gulp.src(['src/index.jade'])
+    .pipe(jadeGlobbing({
+      ignore: ['src/layout/templates']
     }))
-    .pipe(gulp.dest('build/styles.css'));
+    .pipe(gulp.dest('build'));
 });
 ```
 
-### extensions
+### ignore
 Type: `String` or `Array`
 
-The file extensions to treat as valid imported files. If files are found that match the glob, but its extensions don't match this option, they will not be added to the resulting file.
+Folders gulp-jade-globbing should ignore.
 
-Default: `['.css']`
-
-### ignoreFolders
-Type: `String` or `Array`
-
-Folders gulp-css-globbing should ignore. Each folder should be relative to the source file.
-
-Default: `['']`
-
-### autoReplaceBlock
-Type: `String` or `Object`
-
-Search for a block of text which is replaced with the path to the files we want to glob. Path can be re-replaced each time we call gulp-css-globbing.
-
-Default: `{
-        onOff: false,
-        globBlockBegin: 'cssGlobbingBegin',
-        globBlockEnd: 'cssGlobbingEnd',
-        globBlockContents: '../**/*.scss'
-      }`
-
-With the above settings, inside of your main .scss file you would only need to have this:
-```
-// cssGlobbingBegin
-// this line can be blank
-// cssGlobbingEnd
-```
-
-
-[travis-url]: https://travis-ci.org/jsahlen/gulp-css-globbing
-[travis-image]: https://travis-ci.org/jsahlen/gulp-css-globbing.svg?branch=master
-[depstat-url]: https://david-dm.org/jsahlen/gulp-css-globbing
-[depstat-image]: https://david-dm.org/jsahlen/gulp-css-globbing.svg
+Default: `[]`
