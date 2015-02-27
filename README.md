@@ -3,7 +3,7 @@
 
 Expands Jade `include` statements containing globs with the full paths.
 
-Heavily inspired by [`sass-globbing`](https://github.com/chriseppstein/sass-globbing) and [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
+Heavily based on [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
 
 ## Install
 
