@@ -1,39 +1,34 @@
 {
-  "name": "gulp-css-globbing",
-  "version": "0.1.5",
-  "description": "A Gulp plugin for globbing CSS @import statements",
-  "author": "Johan Sahlén <johan@monospace.se>",
+  "name": "gulp-jade-globbing",
+  "version": "0.1.0",
+  "description": "Globbing Jade includes the easy way.",
+  "author": "Thomas Creeten <thomas@creeation.de> (http://github.com/CREEATION)",
   "contributors": [
+    {
+      "name": "Johan Sahlén"
+      "url": "https://github.com/jsahlen"
+    },
     {
       "name": "Scott Nath",
       "url": "https://github.com/scottnath"
     }
   ],
-  "repository": "git://github.com/jsahlen/gulp-css-globbing.git",
-  "bugs": "https://github.com/jsahlen/gulp-css-globbing/issues",
+  "repository": "git://github.com/CREEATION/gulp-jade-globbing.git",
+  "bugs": "https://github.com/CREEATION/gulp-jade-globbing/issues",
   "license": {
     "type": "MIT",
-    "url": "http://github.com/jsahlen/gulp-css-globbing/raw/master/LICENSE"
+    "url": "http://github.com/CREEATION/gulp-jade-globbing/raw/master/LICENSE"
   },
   "main": "index.js",
   "dependencies": {
     "glob": "^4.0.5",
-    "gulp-util": "^3.0.0",
     "vinyl-map": "^1.0.1"
   },
-  "devDependencies": {
-    "event-stream": "^3.1.7",
-    "mocha": "^1.21.3",
-    "should": "^4.0.4",
-    "vinyl": "^0.3.2"
-  },
-  "scripts": {
-    "test": "./node_modules/.bin/mocha"
-  },
   "keywords": [
-    "gulpplugin",
-    "css",
-    "glob"
+    "gulp",
+    "jade",
+    "glob",
+    "globbing"
   ],
   "engines": {
     "node": ">=0.10.0"
