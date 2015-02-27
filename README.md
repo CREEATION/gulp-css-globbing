@@ -1,4 +1,5 @@
 # gulp-jade-globbing
+## *NOT READY FOR USE YET*
 > Globbing with Jade's `include` the easy way.
 
 Expands Jade `include` statements containing globs with the full paths.
