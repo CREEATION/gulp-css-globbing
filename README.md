@@ -1,8 +1,8 @@
 # gulp-jade-globbing
 ## *NOT READY FOR USE YET*
-> Globbing with Jade's `include` the easy way.
+> Globbing with Jade the easy way.
 
-Expands Jade `include` statements containing globs with the full paths.
+Expands Jade `include` and `extends` statements containing globs with the full paths.
 
 Heavily based on [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
 
@@ -14,8 +14,9 @@ Install `gulp-jade-globbing` as a development dependency using npm:
 npm install --save-dev gulp-jade-globbing
 ```
 
-## Usage
+## Usage without options
 
+### gulpfile
 ```javascript
 var jade          = require('gulp-jade');
 var jadeGlobbing  = require('gulp-jade-globbing');
@@ -28,33 +29,54 @@ gulp.task('jade', function(){
 });
 ```
 
-Given a Jade file that looks like this:
-
+### src/index.jade
 ```jade
-//- Include Everything
-include ../**/*.jade
-
-doctype html
-html
-  head
-    meta(charset='utf-8')
-    title Hello?
-
-  body
-    h1 Hello World!
+//- ...
+include ../foo/bar/**/*.jade
+//- ...
 ```
 
-The plugin would produce the following:
+## Advanced example
 
+### gulp task
+```javascript
+gulp.task('jade', function(){
+  gulp.src(['src/views/**/*.jade'])
+    .pipe(jadeGlobbing({
+      placeholders: {
+        'base': 'src/base/*.jade',
+        'modules': 'src/modules/**/*.jade',
+        'layout': 'src/layout/**/*',
+        'default-template': 'src/layout/templates/default.jade',
+      }
+      ignore: [
+        'src/views',
+        'src/layout/templates'
+      ]
+    }))
+    .pipe(jade())
+    .pipe(gulp.dest('build'));
+});
+```
+
+### page
 ```jade
-//- Include Everything
-include ../layout/header/template.jade
-include ../layout/navigation/template.jade
-include ../modules/buttons/template.jade
-include ../modules/forms/template.jade
-include ../modules/tables/template.jade
-include ../modules/notification/template.jade
+include ../../utilities/**/*.jade
 
+extends {default-template}
+
+block includes
+  include {base}
+  include {modules}
+  include {layout}
+
+block container
+  h1 Hello World!
+```
+
+### template to extend
+```jade
+block includes
 doctype html
 html
   head
@@ -62,7 +84,7 @@ html
     title Hello?
 
   body
-    h1 Hello World!
+    block container
 ```
 
 ## Options
@@ -73,7 +95,13 @@ html
 gulp.task('jade', function(){
   gulp.src(['src/index.jade'])
     .pipe(jadeGlobbing({
-      ignore: ['src/layout/templates']
+      placeholders: {
+        'base': 'src/jade/base/*.jade',
+        'modules': 'src/jade/modules/**/*.jade',
+        'layout': 'src/jade/layout/**/*',
+        'default-template': 'src/jade/layout/templates/default.jade',
+      }
+      ignore: ['src/jade/layout/templates']
     }))
     .pipe(jade())
     .pipe(gulp.dest('build'));
@@ -86,3 +114,10 @@ Type: `String` or `Array`
 Folders gulp-jade-globbing should ignore.
 
 Default: `[]`
+
+### placeholders
+Type: `Object`
+
+Placeholders to use within jade files, e.g. `{modules}`.
+
+Default: `undefined`
