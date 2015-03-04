@@ -43,8 +43,7 @@ include ../foo/bar/**/*.jade
 gulp.task('jade', function(){
   gulp.src(['src/views/**/*.jade'])
     .pipe(jadeGlobbing({
-      placeholders: {
-        'base': 'src/base/*.jade',
+      placeholder: {
         'modules': 'src/modules/**/*.jade',
         'layout': 'src/layout/**/*',
         'default-template': 'src/layout/templates/default.jade',
@@ -61,12 +60,11 @@ gulp.task('jade', function(){
 
 ### page
 ```jade
-include ../../utilities/**/*.jade
-
 extends {default-template}
 
 block includes
-  include {base}
+  include ../../utilities/**/*.jade
+  include ../../base/*.jade
   include {modules}
   include {layout}
 
@@ -95,7 +93,7 @@ html
 gulp.task('jade', function(){
   gulp.src(['src/index.jade'])
     .pipe(jadeGlobbing({
-      placeholders: {
+      placeholder: {
         'base': 'src/jade/base/*.jade',
         'modules': 'src/jade/modules/**/*.jade',
         'layout': 'src/jade/layout/**/*',
@@ -115,7 +113,7 @@ Folders gulp-jade-globbing should ignore.
 
 Default: `[]`
 
-### placeholders
+### placeholder
 Type: `Object`
 
 Placeholders to use within jade files, e.g. `{modules}`.
