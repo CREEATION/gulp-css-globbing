@@ -1,5 +1,4 @@
 # gulp-jade-globbing
-## *NOT READY FOR USE YET*
 > Globbing with Jade the easy way.
 
 Expands Jade `include` and `extends` statements to allow globbing and placeholders.
