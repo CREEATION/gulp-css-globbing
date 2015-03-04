@@ -118,4 +118,4 @@ Type: `Object`
 
 Placeholders to use within jade files, e.g. `{modules}`.
 
-Default: `undefined`
+Default: `{}`
