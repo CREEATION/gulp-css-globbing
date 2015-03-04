@@ -1,7 +1,7 @@
 {
   "name": "gulp-jade-globbing",
-  "version": "0.1.1",
-  "description": "Globbing Jade includes the easy way.",
+  "version": "0.1.2",
+  "description": "Globbing Jade includes & extends the easy way.",
   "author": "Thomas Creeten <thomas@creeation.de> (http://github.com/CREEATION)",
   "contributors": [
     {
@@ -21,6 +21,7 @@
   },
   "main": "index.js",
   "dependencies": {
+    "colors": "^1.0.3",
     "glob": "^4.0.5",
     "vinyl-map": "^1.0.1"
   },
