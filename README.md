@@ -2,13 +2,13 @@
 ## *NOT READY FOR USE YET*
 > Globbing with Jade the easy way.
 
-Expands Jade `include` and `extends` statements containing globs with the full paths.
+Expands Jade `include` and `extends` statements to allow globbing and placeholders.
 
-Heavily based on [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
+Based on [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
 
 ## Install
 
-Install `gulp-jade-globbing` as a development dependency using npm:
+Install `gulp-jade-globbing` as a development dependency using npm (**not yet**):
 
 ```shell
 npm install --save-dev gulp-jade-globbing
