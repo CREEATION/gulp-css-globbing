@@ -7,7 +7,7 @@ Based on [`gulp-css-globbing`](https://github.com/jsahlen/gulp-css-globbing).
 
 ## Install
 
-Install `gulp-jade-globbing` as a development dependency using npm (**not yet**):
+Install `gulp-jade-globbing` as a development dependency using npm:
 
 ```shell
 npm install --save-dev gulp-jade-globbing
