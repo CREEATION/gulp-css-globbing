@@ -8,6 +8,7 @@ var map     = require('vinyl-map');
 var colors  = require('colors');
 
 var path    = require('path');
+var fs      = require('fs');
 
 /**
  * Output a message, e.g. errors, warnings,...
@@ -96,6 +97,17 @@ var getGlobType = function (path) {
   return globType;
 };
 
+/**
+ * Parse the files that will be extended
+ * @param  {String} path     Path of the requested file
+ * @param  {String} filename Name of the file
+ * @return {String}          File content
+ */
+var parseExtends = function(path, fileName) {
+  var data = fs.readFileSync(path + fileName).toString();
+  return data;
+}
+
 module.exports = function (options) {
   /**
    * Default options object
@@ -141,6 +153,14 @@ module.exports = function (options) {
     var globRegEx           = /\/\*/;
     var placeholderRegEx    = /\{/;
     var dirName             = path.dirname(filepath);
+
+    /**
+     * Parse all extended files
+     */
+    content = parseExtends(
+      filepath.replace(/\/$/, '').match(/.*\//g)[0],
+      content.match(/extends.*/g)[0].replace(/.*\s+/g, '')
+    );
 
     /**
      * Check file for "include"'s and "extends" and replace
