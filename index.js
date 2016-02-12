@@ -4,7 +4,7 @@
  * Require 'em all!
  */
 var glob    = require('glob');
-var map     = require('vinyl-map');
+var map     = require('vinyl-map2');
 var colors  = require('colors');
 
 var path    = require('path');
