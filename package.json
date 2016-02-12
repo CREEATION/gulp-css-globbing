@@ -27,7 +27,7 @@
   "dependencies": {
     "colors": "^1.0.3",
     "glob": "^4.0.5",
-    "vinyl-map": "^1.0.1"
+    "vinyl-map2": "^1.2.1"
   },
   "keywords": [
     "gulp",
