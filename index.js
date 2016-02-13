@@ -67,35 +67,6 @@ var isEmptyObject = function (obj) {
   return Object.keys(obj).length === 0;
 };
 
-/**
- * Regex tests to check which type of globbing is used
- * @return {Object} Tests
- */
-var regexTests = {
-  folder: /\/\*\*\/\*.jade/,
-  direct: /[^*]\.jade/,
-  file: /[^*]\/\*\.jade/,
-  all: /\*\/\*[^\.]?/,
-};
-
-/**
- * Get type of globbing used via path string
- * @param  {String} path Path which includes globbing stuff
- * @return {String}      Globbing type used
- */
-var getGlobType = function (path) {
-  var globType;
-
-  Object.keys(regexTests).forEach(function (type) {
-    if (regexTests[type].test(path)) {
-      globType = type;
-      return false;
-    }
-  });
-
-  return globType;
-};
-
 module.exports = function (options) {
   /**
    * Default options object
@@ -138,6 +109,7 @@ module.exports = function (options) {
   return map(function (buffer, filepath) {
     var content             = buffer.toString();
     var contentRegex        = /^((?:\s+)?(?:\binclude\b|\bextends\b)\s.+)$/gm;
+    var rootDirRegEx        = /^(([a-zA-Z]?:)?(?:\.{1,})?[\\\/]?(?:[^\\\/:?"<>|]*)).+\.jade$/;
     var globRegEx           = /\/\*/;
     var placeholderRegEx    = /\{/;
     var dirName             = path.dirname(filepath);
@@ -183,14 +155,9 @@ module.exports = function (options) {
               opt.placeholder[name]
             );
 
-            var placeholderPathArr = placeholderPath.split(path.sep);
-            var rootDir = placeholderPathArr[0] === '.' ? placeholderPathArr[1] : placeholderPathArr[0];
-            var relativeFilepath = rootDir + dirName.split(rootDir)[1];
-            var relativePath = path.relative(relativeFilepath, placeholderPath);
-
             includeGlob = includeGlob.replace(
               '{' + name + '}',
-              relativePath
+              placeholderPath
             );
           }
         });
