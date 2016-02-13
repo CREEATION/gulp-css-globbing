@@ -109,7 +109,6 @@ module.exports = function (options) {
   return map(function (buffer, filepath) {
     var content             = buffer.toString();
     var contentRegex        = /^((?:\s+)?(?:\binclude\b|\bextends\b)\s.+)$/gm;
-    var rootDirRegEx        = /^(([a-zA-Z]?:)?(?:\.{1,})?[\\\/]?(?:[^\\\/:?"<>|]*)).+\.jade$/;
     var globRegEx           = /\/\*/;
     var placeholderRegEx    = /\{/;
     var dirName             = path.dirname(filepath);
