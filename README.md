@@ -1,3 +1,6 @@
+# This package has been deprecated & archived
+## Jade is considered deprecated. Use Pug instead. See the official Pug migration guide: https://pugjs.org/api/migration-v2.html#project-rename
+
 # gulp-jade-globbing
 > Globbing with Jade the easy way.
 
